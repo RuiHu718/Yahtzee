@@ -2,6 +2,7 @@
  * File: Yahtzee.java
  * ------------------
  * This program will eventually play the Yahtzee game.
+ * Seems to be fun game, but more complicated than the previous assignments
  */
 
 import acm.io.*;
