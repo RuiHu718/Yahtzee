@@ -32,8 +32,11 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         /* You fill this in */
         display.waitForPlayerToClickRoll(1);
         rollDice(dice);
-        display.displayDice(dice);
+        display.displayDice(dice); // put a try-catch block here
 
+        display.waitForPlayerToSelectDice();
+        reRollDice(dice);
+        display.displayDice(dice);
         
     }
 
@@ -43,16 +46,23 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
 
 
-    /* rolls N_DICE for once */
+    /* initial roll of N_DICE */
     private void rollDice(int[] d) {
         for (int i = 0; i < N_DICE; i++) {
             d[i] = rgen.nextInt(1, 6);
         }
     }
 
+
+    private void reRollDice(int[] d) {
+        for (int i = 0; i < N_DICE; i++) {
+            if (display.isDieSelected(i)) d[i] = rgen.nextInt(1, 6);
+        }
+    }
+
     
 		
-/* Private instance variables */
+    /* Private instance variables */
     private int nPlayers;
     private String[] playerNames;
     private YahtzeeDisplay display;
