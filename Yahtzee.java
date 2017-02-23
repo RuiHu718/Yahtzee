@@ -34,9 +34,12 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         rollDice(dice);
         display.displayDice(dice); // put a try-catch block here
 
-        display.waitForPlayerToSelectDice();
-        reRollDice(dice);
-        display.displayDice(dice);
+        //player can reroll twice
+        for (int i = 0; i < 2; i++) {
+            display.waitForPlayerToSelectDice();
+            reRollDice(dice);
+            display.displayDice(dice);
+        }
         
     }
 
@@ -54,6 +57,8 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     }
 
 
+    /* reroll reach die depending on whether it is selected by player
+     * should consider combine this with initial roll */
     private void reRollDice(int[] d) {
         for (int i = 0; i < N_DICE; i++) {
             if (display.isDieSelected(i)) d[i] = rgen.nextInt(1, 6);
