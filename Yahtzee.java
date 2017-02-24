@@ -116,10 +116,10 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
             println(scores[i][16]);
 
-            // display.updateScorecard(6, i+1, scores[i][6]);
-            // display.updateScorecard(7, i+1, scores[i][7]);
-            // display.updateScorecard(15, i+1, scores[i][15]);
-            // display.updateScorecard(16, i+1, scores[i][16]);            
+            display.updateScorecard(7, i+1, scores[i][6]);
+            display.updateScorecard(8, i+1, scores[i][7]);
+            display.updateScorecard(16, i+1, scores[i][15]);
+            display.updateScorecard(17, i+1, scores[i][16]);            
         }
     }
 
