@@ -71,16 +71,26 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
             }
 
             display.updateScorecard(category, j+1, scores[j][category-1]);
+            display.updateScorecard(TOTAL, j+1, calCurrentTotal(scores[j]));
 
             // for testing for now
-            for (int i = 0; i < N_CATEGORIES; i++) {
-                println(categories[j][i]);
-            }
+            // for (int i = 0; i < N_CATEGORIES; i++) {
+            //     println(categories[j][i]);
+            // }
 
         }
         
     }
 
+
+    private int calCurrentTotal(int[] s) {
+        int sum = 0;
+        for (int i = 0; i < N_CATEGORIES-1; i++) { // should not count the last one, total
+            sum += s[i];
+        }
+        return sum;
+    }
+    
 
     /* return score given particular set of dice config and category */
     private int calScore(int category, int[] d) {
