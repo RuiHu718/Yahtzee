@@ -123,9 +123,9 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         // }
         //for testing
         d[0] = 1;
-        d[1] = 2;
-        d[2] = 3;
-        d[3] = 4;
+        d[1] = 1;
+        d[2] = 2;
+        d[3] = 2;
         d[4] = 1;
     }
 
