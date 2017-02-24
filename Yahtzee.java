@@ -42,8 +42,9 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
             display.displayDice(dice);
         }
 
-
-        int score = 0;
+        //Strategy: store scores in an array which is indexed by categories
+        
+        //int score = 0;
         int category = display.waitForPlayerToSelectCategory();
 
         if (!YahtzeeMagicStub.checkCategory(dice, category)) {
@@ -58,8 +59,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                 // category starts from 1 so it is off by one compare to array
                 // there are three possibilities: 0, -1, and an int > 1
                 if (categories[category-1] == 0) {
-                    score = calScore(category, dice);
-                    categories[category-1] = score;
+                    categories[category-1] = calScore(category, dice);
                     break;
                 } else {
                     display.printMessage("You have picked this category before, pick another one this time.");
@@ -67,7 +67,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
             }
         }
 
-        display.updateScorecard(category, 1, score);
+        display.updateScorecard(category, 1, categories[category-1]);
 
         // for testing for now
         for (int i = 0; i < N_CATEGORIES; i++) {
