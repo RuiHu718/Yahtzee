@@ -31,7 +31,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     private void playGame() {
 
-        for (int k = 0; k < 2; k++) { // try three rounds first
+        for (int k = 0; k < 2; k++) { // try two rounds first
         
             for (int j = 0; j < 2; j++) { // try two players first
 
@@ -100,21 +100,21 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                 scores[i][6] += scores[i][j]; // calculating upper score, note the off by 1 issue
             }
 
-            println(scores[i][6]);
+            //println(scores[i][6]);
 
             if (scores[i][6] >= 63) scores[i][7] = 35; // bonus if upper score >= 63
 
-            println(scores[i][7]);
+            //println(scores[i][7]);
 
             for (int k = 8; k < 15; k++){
                 scores[i][15] += scores[i][k]; // calculating lower score
             }
 
-            println(scores[i][15]);            
+            //println(scores[i][15]);            
 
             scores[i][16] = scores[i][6] + scores[i][7] + scores[i][15]; // total=upper+lower+bonus
 
-            println(scores[i][16]);
+            //println(scores[i][16]);
 
             display.updateScorecard(7, i+1, scores[i][6]);
             display.updateScorecard(8, i+1, scores[i][7]);
