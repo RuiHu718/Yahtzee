@@ -30,46 +30,50 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
 
     private void playGame() {
-        /* You fill this in */
-        display.waitForPlayerToClickRoll(1);
-        rollDice(dice);
-        display.displayDice(dice); // put a try-catch block here
 
-        //player can reroll twice
-        for (int i = 0; i < 2; i++) {
-            display.waitForPlayerToSelectDice();
-            reRollDice(dice);
-            display.displayDice(dice);
-        }
+        for (int j = 0; j < 2; j++) { // try two players first
+        
+            display.waitForPlayerToClickRoll(j+1); // player index starts from 1
+            rollDice(dice);
+            display.displayDice(dice); // put a try-catch block here
 
-        //Strategy: store scores in an array which is indexed by categories
-        int category = display.waitForPlayerToSelectCategory();
+            //player can reroll twice
+            for (int i = 0; i < 2; i++) {
+                display.waitForPlayerToSelectDice();
+                reRollDice(dice);
+                display.displayDice(dice);
+            }
 
-        if (!YahtzeeMagicStub.checkCategory(dice, category)) {
-            display.printMessage("category mismatch!");
-            categories[category-1] = -1;
-        } else {
-            while (true) {
-                // category starts from 1 so it is off by one compare to array
-                // there are two arrarys: categories and scores
-                // possible values for categories: -1 and 0, indicating whether
-                // a category has been picked before
-                // possible values for scores: 0 and int > 0
-                if (categories[category-1] == 0) {
-                    categories[category-1] = -1;
-                    scores[category-1] = calScore(category, dice);
-                    break;
-                } else {
-                    display.printMessage("You have picked this category before, pick another one this time.");
+            //Strategy: store scores in an array which is indexed by categories
+            int category = display.waitForPlayerToSelectCategory();
+
+            if (!YahtzeeMagicStub.checkCategory(dice, category)) {
+                display.printMessage("category mismatch!");
+                categories[j][category-1] = -1;
+            } else {
+                while (true) {
+                    // category starts from 1 so it is off by one compare to array
+                    // there are two arrarys: categories and scores
+                    // possible values for categories: -1 and 0, indicating whether
+                    // a category has been picked before
+                    // possible values for scores: 0 and int > 0
+                    if (categories[j][category-1] == 0) {
+                        categories[j][category-1] = -1;
+                        scores[j][category-1] = calScore(category, dice);
+                        break;
+                    } else {
+                        display.printMessage("You have picked this category before, pick another one this time.");
+                    }
                 }
             }
-        }
 
-        display.updateScorecard(category, 1, scores[category-1]);
+            display.updateScorecard(category, j+1, scores[j][category-1]);
 
-        // for testing for now
-        for (int i = 0; i < N_CATEGORIES; i++) {
-            println(categories[i]);
+            // for testing for now
+            for (int i = 0; i < N_CATEGORIES; i++) {
+                println(categories[j][i]);
+            }
+
         }
         
     }
@@ -138,7 +142,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     private YahtzeeDisplay display;
     private RandomGenerator rgen = new RandomGenerator();
     private int[] dice = new int[N_DICE];
-    private int[] categories = new int[N_CATEGORIES];
-    private int[] scores = new int[N_CATEGORIES];
+    private int[][] categories = new int[MAX_PLAYERS][N_CATEGORIES];
+    private int[][] scores = new int[MAX_PLAYERS][N_CATEGORIES];
 
 }
