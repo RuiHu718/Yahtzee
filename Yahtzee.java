@@ -82,9 +82,33 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                 // }
             }
         }
+
+        presentFinalResult();
     }
 
 
+    private void presentFinalResult(){
+        for (int i = 0; i < nPlayers; i++) {
+            for (int j = 0; j < 6; j++) {
+                scores[i][6] += scores[i][j]; // calculating upper score, note the off by 1 issue
+            }
+
+            if (scores[i][6] >= 63) scores[i][7] = 35; // bonus if upper score >= 63
+
+            for (int k = 8; k < 15; k++){
+                scores[i][15] += scores[i][k]; // calculating lower score
+            }
+
+            scores[i][16] = scores[i][6] + scores[i][7] + scores[i][15]; // total=upper+lower+bonus
+
+            display.updateScorecard(6, i+1, scores[i][6]);
+            display.updateScorecard(7, i+1, scores[i][7]);
+            display.updateScorecard(15, i+1, scores[i][15]);
+            display.updateScorecard(16, i+1, scores[i][16]);            
+        }
+    }
+
+    
     private int calCurrentTotal(int[] s) {
         int sum = 0;
         for (int i = 0; i < N_CATEGORIES-1; i++) { // should not count the last one, total
