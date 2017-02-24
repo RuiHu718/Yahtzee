@@ -41,6 +41,19 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
             reRollDice(dice);
             display.displayDice(dice);
         }
+
+        int category = display.waitForPlayerToSelectCategory();
+        if (!YahtzeeMagicStub.checkCategory(dice, category)) {
+            display.printMessage("category mismatch!");
+        }
+            
+        category = category - 1; // category starts from 1 so it is off by one compare to array
+        if (categories[category] != 0) {
+            display.printMessage("You have picked this category before, pick another one this time.");
+        } else {
+            categories[category] = 1;
+        }
+        println(dice);
         
     }
 
@@ -74,5 +87,6 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     private YahtzeeDisplay display;
     private RandomGenerator rgen = new RandomGenerator();
     private int[] dice = new int[N_DICE];
+    private int[] categories = new int[N_CATEGORIES];
 
 }
