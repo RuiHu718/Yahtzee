@@ -57,9 +57,13 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         } else {
             while (true) {
                 // category starts from 1 so it is off by one compare to array
-                // there are three possibilities: 0, -1, and an int > 1
+                // there are two arrarys: categories and scores
+                // possible values for categories: -1 and 0, indicating whether
+                // a category has been picked before
+                // possible values for scores: 0 and int > 0
                 if (categories[category-1] == 0) {
-                    categories[category-1] = calScore(category, dice);
+                    categories[category-1] = -1;
+                    scores[category-1] = calScore(category, dice);
                     break;
                 } else {
                     display.printMessage("You have picked this category before, pick another one this time.");
@@ -67,7 +71,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
             }
         }
 
-        display.updateScorecard(category, 1, categories[category-1]);
+        display.updateScorecard(category, 1, scores[category-1]);
 
         // for testing for now
         for (int i = 0; i < N_CATEGORIES; i++) {
@@ -109,5 +113,6 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     private RandomGenerator rgen = new RandomGenerator();
     private int[] dice = new int[N_DICE];
     private int[] categories = new int[N_CATEGORIES];
+    private int[] scores = new int[N_CATEGORIES];
 
 }
