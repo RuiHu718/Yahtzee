@@ -43,16 +43,10 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         }
 
         //Strategy: store scores in an array which is indexed by categories
-        
-        //int score = 0;
         int category = display.waitForPlayerToSelectCategory();
 
         if (!YahtzeeMagicStub.checkCategory(dice, category)) {
             display.printMessage("category mismatch!");
-            // tricky code here
-            // can't use 0 here because you can't distinguish betwee the cases
-            // of a category never been picked and has been wrongly picked
-            // have to consider this when adding up to get the total score
             categories[category-1] = -1;
         } else {
             while (true) {
@@ -79,7 +73,6 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         }
         
     }
-
 
 
     /* return score given particular set of dice config and category */
@@ -139,7 +132,6 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     }
 
     
-		
     /* Private instance variables */
     private int nPlayers;
     private String[] playerNames;
