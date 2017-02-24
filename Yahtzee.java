@@ -84,7 +84,35 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     /* return score given particular set of dice config and category */
     private int calScore(int category, int[] d) {
-        return 100;
+        int result = 0;
+        if (category == 14) result = 50; // Yahtzee
+        if (category == 13) result = 40; // Large straight
+        if (category == 12) result = 30; // Small straight
+        if (category == 11) result = 25; // Full house
+        // for chance, 3kind, and 4kind, return sum of all dies
+        if (category == 15 || category == 10 || category == 9) result = sumAll(d);
+        // for ones->sixes, return value accordingly
+        if (category == 1 || category == 2 || category == 3 || category == 4 ||
+            category == 5 || category == 6) result = sumSingles(d, category);
+
+        return result;
+    }
+
+
+    /* returns value for ones->sixes according to rules*/
+    private int sumSingles(int[] a, int cate) {
+        int sum = 0;
+        for (int i = 0; i < N_DICE; i++) {
+            if (a[i] == cate) sum += a[i];
+        }
+        return sum;
+    }
+
+    
+    private int sumAll(int[] a) {
+        int sum = 0;
+        for (int i = 0; i < N_DICE; i++) sum += a[i];
+        return sum;
     }
 
 
