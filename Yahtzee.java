@@ -34,17 +34,20 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         for (int j = 0; j < 2; j++) { // try two players first
         
             display.waitForPlayerToClickRoll(j+1); // player index starts from 1
+            display.printMessage(playerNames[j] + ", it is your turn");
             rollDice(dice);
             display.displayDice(dice); // put a try-catch block here
 
             //player can reroll twice
             for (int i = 0; i < 2; i++) {
+                display.printMessage("select dice and roll again");
                 display.waitForPlayerToSelectDice();
                 reRollDice(dice);
                 display.displayDice(dice);
             }
 
             //Strategy: store scores in an array which is indexed by categories
+            display.printMessage("pick a category");
             int category = display.waitForPlayerToSelectCategory();
 
             if (!YahtzeeMagicStub.checkCategory(dice, category)) {
