@@ -31,55 +31,56 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     private void playGame() {
 
-        for (int j = 0; j < 2; j++) { // try two players first
+        for (int k = 0; k < 3; k++) { // try three rounds first
+        
+            for (int j = 0; j < 2; j++) { // try two players first
 
-            display.printMessage(playerNames[j] + ", it is your turn");
-            display.waitForPlayerToClickRoll(j+1); // player index starts from 1
-            rollDice(dice);
-            display.displayDice(dice); // put a try-catch block here
+                display.printMessage(playerNames[j] + ", it is your turn");
+                display.waitForPlayerToClickRoll(j+1); // player index starts from 1
+                rollDice(dice);
+                display.displayDice(dice); // put a try-catch block here
 
-            //player can reroll twice
-            for (int i = 0; i < 2; i++) {
-                display.printMessage("select dice and roll again");
-                display.waitForPlayerToSelectDice();
-                reRollDice(dice);
-                display.displayDice(dice);
-            }
+                //player can reroll twice
+                for (int i = 0; i < 2; i++) {
+                    display.printMessage("select dice and roll again");
+                    display.waitForPlayerToSelectDice();
+                    reRollDice(dice);
+                    display.displayDice(dice);
+                }
 
-            //Strategy: store scores in an array which is indexed by categories
-            display.printMessage("pick a category");
-            int category = display.waitForPlayerToSelectCategory();
+                //Strategy: store scores in an array which is indexed by categories
+                display.printMessage("pick a category");
+                int category = display.waitForPlayerToSelectCategory();
 
-            if (!YahtzeeMagicStub.checkCategory(dice, category)) {
-                display.printMessage("category mismatch!");
-                categories[j][category-1] = -1;
-            } else {
-                while (true) {
-                    // category starts from 1 so it is off by one compare to array
-                    // there are two arrarys: categories and scores
-                    // possible values for categories: -1 and 0, indicating whether
-                    // a category has been picked before
-                    // possible values for scores: 0 and int > 0
-                    if (categories[j][category-1] == 0) {
-                        categories[j][category-1] = -1;
-                        scores[j][category-1] = calScore(category, dice);
-                        break;
-                    } else {
-                        display.printMessage("You have picked this category before, pick another one this time.");
+                if (!YahtzeeMagicStub.checkCategory(dice, category)) {
+                    display.printMessage("category mismatch!");
+                    categories[j][category-1] = -1;
+                } else {
+                    while (true) {
+                        // category starts from 1 so it is off by one compare to array
+                        // there are two arrarys: categories and scores
+                        // possible values for categories: -1 and 0, indicating whether
+                        // a category has been picked before
+                        // possible values for scores: 0 and int > 0
+                        if (categories[j][category-1] == 0) {
+                            categories[j][category-1] = -1;
+                            scores[j][category-1] = calScore(category, dice);
+                            break;
+                        } else {
+                            display.printMessage("You have picked this category before, pick another one this time.");
+                        }
                     }
                 }
+
+                display.updateScorecard(category, j+1, scores[j][category-1]);
+                display.updateScorecard(TOTAL, j+1, calCurrentTotal(scores[j]));
+
+                // for testing for now
+                // for (int i = 0; i < N_CATEGORIES; i++) {
+                //     println(categories[j][i]);
+                // }
             }
-
-            display.updateScorecard(category, j+1, scores[j][category-1]);
-            display.updateScorecard(TOTAL, j+1, calCurrentTotal(scores[j]));
-
-            // for testing for now
-            // for (int i = 0; i < N_CATEGORIES; i++) {
-            //     println(categories[j][i]);
-            // }
-
         }
-        
     }
 
 
