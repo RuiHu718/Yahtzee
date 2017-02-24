@@ -68,6 +68,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                             break;
                         } else {
                             display.printMessage("You have picked this category before, pick another one this time.");
+                            category = display.waitForPlayerToSelectCategory();
                         }
                     }
                 }
