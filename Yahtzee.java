@@ -48,16 +48,21 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
         if (!YahtzeeMagicStub.checkCategory(dice, category)) {
             display.printMessage("category mismatch!");
+            // tricky code here
+            // can't use 0 here because you can't distinguish betwee the cases
+            // of a category never been picked and has been wrongly picked
+            // have to consider this when adding up to get the total score
+            categories[category-1] = -1;
         } else {
             while (true) {
                 // category starts from 1 so it is off by one compare to array
-                if (categories[category-1] != 0) {
-                    display.printMessage("You have picked this category before, pick another one this time.");
-                    continue;
-                } else {
+                // there are three possibilities: 0, -1, and an int > 1
+                if (categories[category-1] == 0) {
                     score = calScore(category, dice);
                     categories[category-1] = score;
                     break;
+                } else {
+                    display.printMessage("You have picked this category before, pick another one this time.");
                 }
             }
         }
