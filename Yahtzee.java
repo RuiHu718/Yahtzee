@@ -53,7 +53,9 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         } else {
             categories[category] = 1;
         }
-        println(dice);
+        for (int i = 0; i < N_CATEGORIES; i++) {
+            println(categories[i]);
+        }
         
     }
 
