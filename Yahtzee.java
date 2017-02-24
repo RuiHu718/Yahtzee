@@ -32,9 +32,9 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
     private void playGame() {
 
         for (int j = 0; j < 2; j++) { // try two players first
-        
-            display.waitForPlayerToClickRoll(j+1); // player index starts from 1
+
             display.printMessage(playerNames[j] + ", it is your turn");
+            display.waitForPlayerToClickRoll(j+1); // player index starts from 1
             rollDice(dice);
             display.displayDice(dice); // put a try-catch block here
 
