@@ -110,14 +110,14 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
         // note the index i and j starts and ends at different places
         // because we are checking two difference cases: 12345 and 23456
-        // for each cell, the number has to be either one or two, otherwise the whole
+        // for each cell, the number has to be 1, otherwise the whole
         // sequence can't be a large straight
         for (int i = 1; i < 6; i++) {
-            if (numOfDiffSides[i] < 1 || numOfDiffSides[i] > 2) largeCaseOne = false;
+            if (numOfDiffSides[i] != 1) largeCaseOne = false;
         }
 
         for (int j = 2; j < 7; j++) {
-            if (numOfDiffSides[j] < 1 || numOfDiffSides[j] > 2) largeCaseTwo = false;
+            if (numOfDiffSides[j] != 1) largeCaseTwo = false;
         }
 
         return (largeCaseOne || largeCaseTwo);
