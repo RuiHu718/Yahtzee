@@ -95,11 +95,34 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         if (category == THREE_OF_A_KIND) return checkNOfKind(dice, 3);
         if (category == FOUR_OF_A_KIND) return checkNOfKind(dice, 4);
         if (category == YAHTZEE) return checkNOfKind(dice, 5);
-        if (category == FULL_HOUSE) return checkFullHouse(dice);        
+        if (category == FULL_HOUSE) return checkFullHouse(dice);
+        if (category == LARGE_STRAIGHT) return checkLargeStraight(dice);
         return false;
     }
 
 
+    private boolean checkLargeStraight(int[] dice) {
+        int[] numOfDiffSides = new int[7];
+        calculateSides(dice, numOfDiffSides);
+
+        boolean largeCaseOne = true; // the case of 12345
+        boolean largeCaseTwo = true; // the case of 23456
+
+        // note the index i and j starts and ends at different places
+        // because we are checking two difference cases: 12345 and 23456
+        // for each cell, the number has to be either one or two, otherwise the whole
+        // sequence can't be a large straight
+        for (int i = 1; i < 6; i++) {
+            if (numOfDiffSides[i] < 1 || numOfDiffSides[i] > 2) largeCaseOne = false;
+        }
+
+        for (int j = 2; j < 7; j++) {
+            if (numOfDiffSides[j] < 1 || numOfDiffSides[j] > 2) largeCaseTwo = false;
+        }
+
+        return (largeCaseOne || largeCaseTwo);
+    }
+    
     /* checks whether a configuration is full house */
     private boolean checkFullHouse(int[] dice) {
         int[] numOfDiffSides = new int[7];
@@ -226,10 +249,10 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         //     d[i] = rgen.nextInt(1, 6);
         // }
         //for testing
-        d[0] = 2;
+        d[0] = 1;
         d[1] = 2;
-        d[2] = 2;
-        d[3] = 3;
+        d[2] = 3;
+        d[3] = 4;
         d[4] = 3;
     }
 
