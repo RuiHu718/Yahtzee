@@ -98,7 +98,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         if (category == FULL_HOUSE) return checkFullHouse(dice);
         if (category == LARGE_STRAIGHT) return checkLargeStraight(dice);
         if (category == SMALL_STRAIGHT) return checkSmallStraight(dice);        
-        return false;
+        return true;            // the default case
     }
 
 
@@ -270,15 +270,15 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     /* initial roll of N_DICE */
     private void rollDice(int[] d) {
-        // for (int i = 0; i < N_DICE; i++) {
-        //     d[i] = rgen.nextInt(1, 6);
-        // }
+        for (int i = 0; i < N_DICE; i++) {
+            d[i] = rgen.nextInt(1, 6);
+        }
         //for testing
-        d[0] = 6;
-        d[1] = 5;
-        d[2] = 3;
-        d[3] = 4;
-        d[4] = 6;
+        // d[0] = 6;
+        // d[1] = 5;
+        // d[2] = 3;
+        // d[3] = 4;
+        // d[4] = 6;
     }
 
 
