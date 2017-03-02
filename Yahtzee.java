@@ -52,7 +52,8 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                 display.printMessage("pick a category");
                 int category = display.waitForPlayerToSelectCategory();
 
-                if (!YahtzeeMagicStub.checkCategory(dice, category)) {
+                if (!myCheckCategory(dice, category)) {
+                    //                if (!YahtzeeMagicStub.checkCategory(dice, category)) {
                     display.printMessage("category mismatch!");
                     categories[j][category-1] = -1;
                 } else {
@@ -86,6 +87,30 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         presentFinalResult();
     }
 
+
+    /* my own implementation of checkCategory */
+    private boolean myCheckCategory(int[] dice, int category) {
+        return checkThreeOfKind(dice, category);
+    }
+
+
+    private boolean checkThreeOfKind(int[] dice, int category) {
+        // this arrary keep track of how many times every side turn out in dice
+        // note this array has 7 elements:0-6, I made it this way so don't have to
+        // deal with the off by one issue caused by die starts from 1 but array 0
+        int[] numOfDiffSides = new int[7];
+
+        //if you see a six, then increment numOfDiffSides[6] by 1
+        for (int i = 0 ; i < N_DICE; i++) {
+            numOfDiffSides[dice[i]] += 1;
+        }
+
+        for (int j = 1; j < 7; j++) { // starts from 1 because 0 position will always be 0
+            if (numOfDiffSides[j] >= 3) return true;
+        }
+
+        return false;
+    }
 
     private void presentFinalResult(){
 
@@ -169,15 +194,15 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     /* initial roll of N_DICE */
     private void rollDice(int[] d) {
-        for (int i = 0; i < N_DICE; i++) {
-            d[i] = rgen.nextInt(1, 6);
-        }
+        // for (int i = 0; i < N_DICE; i++) {
+        //     d[i] = rgen.nextInt(1, 6);
+        // }
         //for testing
-        // d[0] = 1;
-        // d[1] = 1;
-        // d[2] = 2;
-        // d[3] = 1;
-        // d[4] = 1;
+        d[0] = 1;
+        d[1] = 1;
+        d[2] = 2;
+        d[3] = 1;
+        d[4] = 1;
     }
 
 
