@@ -55,7 +55,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
                 //if (!myCheckCategory(dice, category)) {
                 if (!YahtzeeMagicStub.checkCategory(dice, category)) {
                     display.printMessage("category mismatch!");
-                    pause(200);
+                    pause(1000);
                     categories[j][category-1] = -1;
                 } else {
                     while (true) {
