@@ -203,7 +203,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         d[1] = 1;
         d[2] = 1;
         d[3] = 2;
-        d[4] = 3;
+        d[4] = 1;
     }
 
 
