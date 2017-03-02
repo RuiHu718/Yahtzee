@@ -96,21 +96,27 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
 
     private boolean checkThreeOfKind(int[] dice, int category) {
-        // this arrary keep track of how many times every side turn out in dice
-        // note this array has 7 elements:0-6, I made it this way so don't have to
-        // deal with the off by one issue caused by die starts from 1 but array 0
         int[] numOfDiffSides = new int[7];
-
-        //if you see a six, then increment numOfDiffSides[6] by 1
-        for (int i = 0 ; i < N_DICE; i++) {
-            numOfDiffSides[dice[i]] += 1;
-        }
+        calculateSides(dice, numOfDiffSides);
 
         for (int j = 1; j < 7; j++) { // starts from 1 because 0 position will always be 0
             if (numOfDiffSides[j] >= 3) return true;
         }
 
         return false;
+    }
+    
+
+    /* calculate how many times each side turn up*/
+    private void calculateSides(int[] dice, int[] numOfDiffSides) {
+        // this arrary keep track of how many times every side turn out in dice
+        // note this array has 7 elements:0-6, I made it this way so don't have to
+        // deal with the off by one issue caused by die starts from 1 but array 0
+
+        //if you see a six, then increment numOfDiffSides[6] by 1
+        for (int i = 0 ; i < N_DICE; i++) {
+            numOfDiffSides[dice[i]] += 1;
+        }
     }
 
     private void presentFinalResult(){
