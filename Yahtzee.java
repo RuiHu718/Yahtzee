@@ -249,7 +249,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         //     d[i] = rgen.nextInt(1, 6);
         // }
         //for testing
-        d[0] = 1;
+        d[0] = 6;
         d[1] = 2;
         d[2] = 3;
         d[3] = 4;
