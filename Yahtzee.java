@@ -97,9 +97,34 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         if (category == YAHTZEE) return checkNOfKind(dice, 5);
         if (category == FULL_HOUSE) return checkFullHouse(dice);
         if (category == LARGE_STRAIGHT) return checkLargeStraight(dice);
+        if (category == SMALL_STRAIGHT) return checkSmallStraight(dice);        
         return false;
     }
 
+
+    private boolean checkSmallStraight(int[] dice) {
+        int[] numOfDiffSides = new int[7];
+        calculateSides(dice, numOfDiffSides);
+
+        boolean smallCaseOne = true; // the case of 1234
+        boolean smallCaseTwo = true; // the case of 2345
+        boolean smallCaseThree = true; // the case of 3456
+
+        for (int i = 1; i < 5; i++) {
+            if (numOfDiffSides[i] < 1 || numOfDiffSides[i] > 2) smallCaseOne = false;
+        }
+
+        for (int j = 2; j < 6; j++) {
+            if (numOfDiffSides[j] < 1 || numOfDiffSides[j] > 2) smallCaseTwo = false;
+        }
+
+        for (int k = 3; k < 7; k++) {
+            if (numOfDiffSides[k] < 1 || numOfDiffSides[k] > 2) smallCaseThree = false;
+        }
+        
+        return (smallCaseOne || smallCaseTwo || smallCaseThree);
+    }
+    
 
     private boolean checkLargeStraight(int[] dice) {
         int[] numOfDiffSides = new int[7];
@@ -253,7 +278,7 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         d[1] = 1;
         d[2] = 3;
         d[3] = 4;
-        d[4] = 5;
+        d[4] = 3;
     }
 
 
