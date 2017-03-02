@@ -94,11 +94,27 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         if (category == THREE_OF_A_KIND) return checkNOfKind(dice, 3);
         if (category == FOUR_OF_A_KIND) return checkNOfKind(dice, 4);
         if (category == YAHTZEE) return checkNOfKind(dice, 5);
+        if (category == FULL_HOUSE) return checkFullHouse(dice);        
         return false;
     }
 
 
-    /* this should include three, four, yahtzee and possibly full house situation */
+    /* checks whether a configuration is full house */
+    private boolean checkFullHouse(int[] dice) {
+        int[] numOfDiffSides = new int[7];
+        calculateSides(dice, numOfDiffSides);
+
+        boolean twos = false;
+        boolean threes = false;
+        for (int j = 1; j < 7; j++) { // starts from 1 because 0 position will always be 0
+            if (numOfDiffSides[j] == 2) twos = true;
+            if (numOfDiffSides[j] == 3) threes = true;            
+        }
+        return (twos && threes);
+    }
+
+    
+    /* this ncludes three, four, and yahtzee situations */
     private boolean checkNOfKind(int[] dice, int n) {
         int[] numOfDiffSides = new int[7];
         calculateSides(dice, numOfDiffSides);
@@ -212,8 +228,8 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         d[0] = 2;
         d[1] = 2;
         d[2] = 2;
-        d[3] = 2;
-        d[4] = 2;
+        d[3] = 3;
+        d[4] = 3;
     }
 
 
