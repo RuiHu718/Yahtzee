@@ -91,7 +91,10 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     /* my own implementation of checkCategory */
     private boolean myCheckCategory(int[] dice, int category) {
-        return checkNOfKind(dice, 3);
+        if (category == THREE_OF_A_KIND) return checkNOfKind(dice, 3);
+        if (category == FOUR_OF_A_KIND) return checkNOfKind(dice, 4);
+        if (category == YAHTZEE) return checkNOfKind(dice, 5);
+        return false;
     }
 
 
@@ -206,11 +209,11 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
         //     d[i] = rgen.nextInt(1, 6);
         // }
         //for testing
-        d[0] = 6;
-        d[1] = 3;
-        d[2] = 1;
+        d[0] = 2;
+        d[1] = 2;
+        d[2] = 2;
         d[3] = 2;
-        d[4] = 1;
+        d[4] = 2;
     }
 
 
