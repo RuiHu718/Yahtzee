@@ -91,16 +91,17 @@ public class Yahtzee extends GraphicsProgram implements YahtzeeConstants {
 
     /* my own implementation of checkCategory */
     private boolean myCheckCategory(int[] dice, int category) {
-        return checkThreeOfKind(dice, category);
+        return checkNOfKind(dice, 3);
     }
 
 
-    private boolean checkThreeOfKind(int[] dice, int category) {
+    /* this should include three, four, yahtzee and possibly full house situation */
+    private boolean checkNOfKind(int[] dice, int n) {
         int[] numOfDiffSides = new int[7];
         calculateSides(dice, numOfDiffSides);
 
         for (int j = 1; j < 7; j++) { // starts from 1 because 0 position will always be 0
-            if (numOfDiffSides[j] >= 3) return true;
+            if (numOfDiffSides[j] >= n) return true;
         }
 
         return false;
